@@ -19,7 +19,7 @@ public class View {
             System.out.println("Bitte geben Sie Ihre Auswahl an:");
             System.out.println("Für ein zufälliges Bier geben Sie bitte 'random' ein.");
             System.out.println("Für eine zufällige Brauerei geben Sie bitte 'suche brauerei' ein.");
-            System.out.println("Für eine zufällige Brauerei geben Sie bitte 'suche brauerei' ein.");
+
 
             String auswahl = scan.nextLine();
             String pathRandom = "random";
@@ -35,12 +35,20 @@ public class View {
                 }
             } else if (auswahl.toLowerCase().equals(pathSucheBrauerei)) {
                 System.out.println(randomBrewery.parseJSONRandomBrewery());
+                try {
+                    csvService.writeBreweryResultsToCsv(randomBrewery);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             } else if (auswahl.toLowerCase().equals(pathAbbruch)) {
+                csvService.closeBeerWriter();
+                csvService.closeBreweryWriter();
                 this.abbruch = true;
             } else {
                 System.out.println("Diese Auswahl existiert nicht!");
                 start();
             }
+
         }
     }
 }

@@ -24,6 +24,9 @@ public class RandomBrewery {
             String post_id = arr.get(i).getAsJsonObject().get("post_id").getAsString();
             System.out.println(post_id);
         }*/
+        this.controller = new Controller();
+        this.getController = controller.pathIsRandomBeer();
+        this.json = getController;
         return "Zufällige Brauerei: ID: '" + breweryId +"', Name '" + breweryName + "'\n";
     }
 
